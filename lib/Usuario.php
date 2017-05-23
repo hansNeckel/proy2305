@@ -25,7 +25,7 @@ class Usuario{
         
     }
     
-    function VerificaUsuarioClave(){
+    function ModificarUsuarioClave(){
         $oConn=new Conexion();
         
         if ($oConn->Conectar())
