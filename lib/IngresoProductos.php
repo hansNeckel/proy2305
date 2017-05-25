@@ -1,12 +1,25 @@
 <?php
-include '../lib/conexion.php';
-/*Instanción objeto de conexion*/
-$conn=new Conexion;
-if ($conn->conectar()){
-$nom=$_POST["nombre"];
-$totusd=$_POST["totalusd"];
-$ano=$_POST["ano"];
-$sql="INSERT INTO productos(nombre,totalusd,ano) values('$nom',$totusd,$ano)";
-$conn->objconn->query($sql);
-echo $sql;
-}
+   include '../constantes.php';
+   include '../librerias.php';
+?>
+<?php
+        $nomusuario=$_POST['nomusuario'];
+        $passAntigua = $_POST['passAntigua'];
+        $passNueva = $_POST['passNueva'];
+        $passConfirma = $_POST['passConfirma'];
+        
+        if ($passNueva!=$passConfirma){
+            echo "Las claves no son iguales";
+            return; 
+        }
+        $oUsr=new Usuario();
+        $oUsr->nombre=$nomusuario;
+        $oUsr->clave=$passAntigua;
+                
+        if(!$oUsr->VerificaUsuarioClave()){
+           echo "El usuario o clave antigua no corresponde";
+           return; 
+        }
+        
+        echo "Estamos listos para el cambio"
+?>
