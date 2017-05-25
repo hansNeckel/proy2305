@@ -1,14 +1,12 @@
 <?php
-//include 'Producto';
-class ConsultaProductos{
-    
-private function Conexion(){
-     $miconn = new mysqli("localhost", "root", "avaras08", "ventas");
-     if ($miconn->connect_errno) {
-        return "Fallo al conectar a MySQL: (" . $miconn->connect_errno . ") " . $miconn->connect_error;
-     }
-     return $miconn;  
-  }
+include '../lib/conexion.php';
+/*Instanción objeto de conexion*/
+$conn=new Conexion;
+if ($conn->conectar()){
+$nom=$_POST["nombre"];
+$totusd=$_POST["totalusd"];
+$ano=$_POST["ano"];
+$sql="INSERT INTO productos(nombre,totalusd,ano) values('$nom',$totusd,$ano)";
+$conn->objconn->query($sql);
+echo $sql;
 }
-
-
